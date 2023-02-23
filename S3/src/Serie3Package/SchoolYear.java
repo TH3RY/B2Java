@@ -1,6 +1,8 @@
 package Serie3Package;
 
-public class SchoolYear {
+import java.io.Serializable;
+
+public class SchoolYear implements Serializable {
     private String sectionName;
     private int year;
     private AcademicDegree academicDegree;
