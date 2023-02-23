@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,30 +7,40 @@ public class Main {
 
         String firstName;
         String lastName;
-        char gender;
+        Person.genderEnum gender;
         int year;
         int month;
         int day;
-        String section;
-        int yearNumber;
+        Student.sectionNameEnum section;
+        Student.studyYearNumberEnum yearNumber;
 
         try {
-            student = new Student("Pierre", "Legrand", 'x', 2003, 10, 21, "info", 2);
+            student = new Student("Pierre", "Legrand", GenderEnum.X, 2003, 10, 21, Student.sectionNameEnum.info, Student.studyYearNumberEnum.second);
             JOptionPane.showMessageDialog(null, student, "Confirmation d’inscription", JOptionPane.PLAIN_MESSAGE);
             do {
                 firstName = JOptionPane.showInputDialog(null, "FirstName");
                 lastName = JOptionPane.showInputDialog(null, "LastName");
-                gender = JOptionPane.showInputDialog(null, "Gender m - f - x").charAt(0);
+                switch (JOptionPane.showInputDialog(null, "Gender m - f - x").charAt(0)) {
+                    case 'f' -> gender = Person.genderEnum.F;
+                    case 'm' -> gender = Person.genderEnum.M;
+                    default -> gender = Person.genderEnum.X;
+                }
                 year = Integer.parseInt(JOptionPane.showInputDialog(null, "Year"));
                 month = Integer.parseInt(JOptionPane.showInputDialog(null, "Month"));
                 day = Integer.parseInt(JOptionPane.showInputDialog(null, "Day"));
-                section = JOptionPane.showInputDialog(null, "Section {\"compta\", \"droit\", \"market\", \"info\"}");
-                yearNumber = Integer.parseInt(JOptionPane.showInputDialog(null, "Annee 1 2 3"));
+                section = Student.sectionNameEnum.valueOf(JOptionPane.showInputDialog(null, "Section \"compta\", \"droit\", \"market\", \"info\" in lowercase"));
+                yearNumber = switch (JOptionPane.showInputDialog(null, "Year 1 - 2 - 3").charAt(0))  {
+                    case '1' -> Student.studyYearNumberEnum.first;
+                    case '2' -> Student.studyYearNumberEnum.second;
+                    case '3' -> Student.studyYearNumberEnum.third;
+                    default ->
+                            throw new YearNumberException("Erreur année entre 1 et 3");
+                };
                 student = new Student(firstName, lastName, gender, year, month, day, section, yearNumber);
                 JOptionPane.showMessageDialog(null, student, "Confirmation d’inscription", JOptionPane.PLAIN_MESSAGE);
 
             } while (JOptionPane.showConfirmDialog(null, "Voulez vous continuer ?") == JOptionPane.OK_OPTION);
-            JOptionPane.showMessageDialog(null, ((double)Person.femaleNb / (double)Person.totalNb) * 100 + " % de femme", "prct female", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, ((double) Person.femaleNb / (double) Person.totalNb) * 100 + " % de femme", "prct female", JOptionPane.PLAIN_MESSAGE);
 
         } catch (GenderException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Valeur pour le genre non acceptée", JOptionPane.ERROR_MESSAGE);

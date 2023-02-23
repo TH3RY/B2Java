@@ -27,6 +27,18 @@ public class Book extends Publication implements Paging{
         this.contentPagesNb = contentPagesNb;
     }
 
+    public int getTableOfContentPagesNb() {
+        return tableOfContentPagesNb;
+    }
+
+    public int getPrefacePagesNb() {
+        return prefacePagesNb;
+    }
+
+    public int getContentPagesNb() {
+        return contentPagesNb;
+    }
+
     @Override
     public int pagesCounting() {
         return tableOfContentPagesNb + contentPagesNb + prefacePagesNb;

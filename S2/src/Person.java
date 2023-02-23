@@ -1,17 +1,31 @@
-import javax.swing.*;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Person extends Exception {
+public class Person  {
     private String firstname;
     private String lastname;
-    private char gender;
+
+
+    public enum GenderEnum {
+        M('m'), F('f'), X('x');
+
+        public char toChar() {
+            return asChar;
+        }
+
+        private final char asChar;
+
+        GenderEnum(char asChar) {
+            this.asChar = asChar;
+        }
+    }
+    private GenderEnum gender;
     private LocalDate birthdate;
     public static int femaleNb = 0;
     public static int totalNb = 0;
 
 
-    public Person(String firstname, String lastname, char gender, int year, int month, int day) throws GenderException {
+    public Person(String firstname, String lastname, GenderEnum gender, int year, int month, int day) throws GenderException {
         this.firstname = firstname;
         this.lastname = lastname;
         setGender(gender);
@@ -31,17 +45,18 @@ public class Person extends Exception {
         return lastname;
     }
 
-    public void setGender(char gender) throws GenderException {
-        if (gender != 'm' && gender != 'f' && gender != 'x') {
+    public void setGender(genderEnum newGender) /* throws GenderException */  {
+        /*if (gender != 'm' && gender != 'f' && gender != 'x') {
             String message = "La valeur " + gender + " est invalide";
             throw new GenderException(gender, message);
-        }
-        if (gender == 'f') femaleNb++;
-        this.gender = gender;
+        }*/
+        if (newGender == genderEnum.F)
+            femaleNb++;
+        this.gender = newGender;
     }
 
     public char getGender() {
-        return gender;
+        return this.gender.asChar;
     }
 
     @Override
