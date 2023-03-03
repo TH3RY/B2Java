@@ -6,19 +6,7 @@ public class Person  {
     private String lastname;
 
 
-    public enum GenderEnum {
-        M('m'), F('f'), X('x');
 
-        public char toChar() {
-            return asChar;
-        }
-
-        private final char asChar;
-
-        GenderEnum(char asChar) {
-            this.asChar = asChar;
-        }
-    }
     private GenderEnum gender;
     private LocalDate birthdate;
     public static int femaleNb = 0;
@@ -45,18 +33,22 @@ public class Person  {
         return lastname;
     }
 
-    public void setGender(genderEnum newGender) /* throws GenderException */  {
+    public void setGender(GenderEnum newGender) /* throws GenderException */  {
         /*if (gender != 'm' && gender != 'f' && gender != 'x') {
             String message = "La valeur " + gender + " est invalide";
             throw new GenderException(gender, message);
         }*/
-        if (newGender == genderEnum.F)
+        if (newGender == GenderEnum.F)
             femaleNb++;
         this.gender = newGender;
     }
 
     public char getGender() {
-        return this.gender.asChar;
+        return switch(this.gender) {
+            case F -> 'F';
+            case M -> 'M';
+            default -> 'X';
+        };
     }
 
     @Override
@@ -65,19 +57,3 @@ public class Person  {
     }
 }
 
-class GenderException extends Exception {
-    private char wrongGender;
-
-    public GenderException(char wrongGender, String message) {
-        super(message);
-        setWrongGender(wrongGender);
-    }
-
-    public char getWrongGender() {
-        return wrongGender;
-    }
-
-    public void setWrongGender(char wrongGender) {
-        this.wrongGender = wrongGender;
-    }
-}

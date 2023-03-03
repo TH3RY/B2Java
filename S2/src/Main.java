@@ -7,7 +7,7 @@ public class Main {
 
         String firstName;
         String lastName;
-        Person.genderEnum gender;
+        GenderEnum gender;
         int year;
         int month;
         int day;
@@ -21,9 +21,9 @@ public class Main {
                 firstName = JOptionPane.showInputDialog(null, "FirstName");
                 lastName = JOptionPane.showInputDialog(null, "LastName");
                 switch (JOptionPane.showInputDialog(null, "Gender m - f - x").charAt(0)) {
-                    case 'f' -> gender = Person.genderEnum.F;
-                    case 'm' -> gender = Person.genderEnum.M;
-                    default -> gender = Person.genderEnum.X;
+                    case 'f' -> gender = GenderEnum.F;
+                    case 'm' -> gender = GenderEnum.M;
+                    default -> gender = GenderEnum.X;
                 }
                 year = Integer.parseInt(JOptionPane.showInputDialog(null, "Year"));
                 month = Integer.parseInt(JOptionPane.showInputDialog(null, "Month"));

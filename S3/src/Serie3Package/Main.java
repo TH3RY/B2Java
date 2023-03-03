@@ -14,29 +14,52 @@ public class Main {
         Student student9 = new Student("S9", "NDF9", new SchoolYear("AS", 2, AcademicDegree.MASTER));
         Student student10 = new Student("S10", "NDF10", new SchoolYear("Info", 2, AcademicDegree.BACHELOR));
         Student [] students = {student1, student10,student2,student3,student4,student5,student6,student7,student8,student9};
-        File file = new File("myObjects.txt");
-        try (   FileOutputStream f = new FileOutputStream(file);
-                ObjectOutputStream o = new ObjectOutputStream(f);
-                FileInputStream fi = new FileInputStream(file);
-                ObjectInputStream oi = new ObjectInputStream(fi);
+        String filename = "serialization.txt";
+        String filename2 = "serializationObj.txt";
+        CommonZone cz = new CommonZone();
+        try (   /*
+                    FileWriter fOutput = new FileWriter(filename, false);
+                    PrintWriter output = new PrintWriter(fOutput);
+                    FileReader fInput = new FileReader(filename);
+                    BufferedReader input = new BufferedReader(fInput);
+                */
+                FileOutputStream fileOutput= new FileOutputStream(filename2);
+                ObjectOutputStream output = new ObjectOutputStream(fileOutput);
+                FileInputStream fileInput = new FileInputStream (filename2);
+                ObjectInputStream input = new  ObjectInputStream ( fileInput);
         ) {
-            // Write objects to file
-            for (int i = 0; i < students.length; i++) {
-                o.writeObject(students[i]);
-            }
-            o.close();
-            f.close();
+            // Write to file
+            // for (int i = 0; i < students.length; i++) {
+            //    output.(students[i]);
+            // }
 
-            // Read objects
-            Student s1 = (Student) oi.readObject();
-            Student s2 = (Student) oi.readObject();
-            System.out.println(s1.toString());
-            System.out.println(s2);
-            oi.close();
-            fi.close();
-        } catch (IOException | ClassNotFoundException e) {
+            // Read
+            // String txtOutput = input.readLine();
+            // while (txtOutput != null) {
+            //     System.out.println(txtOutput);
+            //     txtOutput = input.readLine();
+            // }
+
+            // Obj write
+            for (int i = 0; i < students.length; i++) {
+                output.writeObject(students[i]);
+            }
+            // Obj read
+            // while (fileInput.available() > 0) {
+            //     Student tmpStudent = (Student)input.readObject();
+            //     System.out.println(tmpStudent);
+            // }
+            Producer p = new Producer(cz);
+            Consumer c = new Consumer(cz);
+
+            p.start();
+            c.start();
+
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 }
 
