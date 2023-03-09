@@ -29,8 +29,8 @@ public class Ball {
     public Ball(Billiard billiard, int x, int y, int width, int height ) {
         this.rectangle = new Rectangle(x,y,width,height);
         this.billiard = billiard;
-        stepX = 5;
-        stepY = 5;
+        stepX = 1;
+        stepY = 1;
         this.color = Color.BLACK;
         this.iColor = 0;
         this.toEliminate = false;

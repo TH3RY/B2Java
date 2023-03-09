@@ -41,8 +41,8 @@ public class Main {
             // }
 
             // Obj write
-            for (int i = 0; i < students.length; i++) {
-                output.writeObject(students[i]);
+            for (Student student : students) {
+                output.writeObject(student);
             }
             // Obj read
             // while (fileInput.available() > 0) {
