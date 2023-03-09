@@ -20,7 +20,5 @@ public class PointsWindow extends JFrame {
         mainContainer = this.getContentPane();       /* Ajout du billard au conteneur de la fenêtre via le gestionnaire de tracé     par défaut */
         mainContainer.add(counterPanel);
         setVisible(true);
-
-
     }
 }

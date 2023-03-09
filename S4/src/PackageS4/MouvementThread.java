@@ -10,7 +10,7 @@ public class MouvementThread extends Thread {
     public void run() {
         while (true) {
             try {
-                Thread.sleep(20);
+                Thread.sleep(5);
                 billiard.repaint();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
