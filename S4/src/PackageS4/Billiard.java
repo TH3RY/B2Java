@@ -20,16 +20,19 @@ public class Billiard extends JPanel {
         this.verticalSides = new ArrayList<>();
         this.horizontalSides = new ArrayList<>();
         this.holes = new ArrayList<>();
-        holes.add(new Hole(new Random().nextInt(399) + 51, new Random().nextInt(130) + 195));
-        holes.add(new Hole(new Random().nextInt(399) + 51, new Random().nextInt(130) + 195));
+        holes.add(new Hole(50,50));
+        holes.add(new Hole(50,500));
         verticalSides.add(new Wall(30, 30, 5, 500, 0));
         verticalSides.add(new Wall(250, 30, 5, 500, 0));
-        // verticalSides.add(new Wall(350, 200, 5, 40, 1));
-        // verticalSides.add(new Wall(250, 250, 5, 40, 2));
-        horizontalSides.add(new Wall(30, 30, 250, 5, 0));
-        horizontalSides.add(new Wall(30, 250, 250, 5, 0));
-        // horizontalSides.add(new Wall(150, 210, 150, 3, 2));
-        // horizontalSides.add(new Wall(275, 280, 100, 3, 1));
+
+        verticalSides.add(new Wall(125, 50, 5, 100, 2));
+
+        horizontalSides.add(new Wall(30, 30, 225, 5, 0));
+        horizontalSides.add(new Wall(30, 530, 225, 5, 0));
+
+        horizontalSides.add(new Wall(150, 400, 80, 5, 2));
+        horizontalSides.add(new Wall(120, 200, 100, 5, 2));
+
         Thread thread = new Thread(new MouvementThread(this));
         thread.start();
         thread = new Thread(new ColorChangingThread(this));
@@ -59,7 +62,7 @@ public class Billiard extends JPanel {
     }
 
     public void newBall() {
-        Ball ball = new Ball(this, new Random().nextInt(399) + 51, new Random().nextInt(127) + 180, 10, 10);
+        Ball ball = new Ball(this, new Random().nextInt(240 - 40)  + 40, new Random().nextInt( 520 - 40)  + 40, 10, 10);
         balls.add(ball);
     }
 
@@ -76,6 +79,4 @@ public class Billiard extends JPanel {
             }
         }
     }
-
-
 }

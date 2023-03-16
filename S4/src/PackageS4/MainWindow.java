@@ -11,7 +11,7 @@ public class MainWindow extends JFrame {
     private Container mainContainer;
     public MainWindow() {
         super("Billiard");
-        setBounds(0, 0, 300, 500);
+        setBounds(0, 0, 300, 650);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
