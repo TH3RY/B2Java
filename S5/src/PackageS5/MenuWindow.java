@@ -13,7 +13,7 @@ public class MenuWindow extends JFrame {
     private JMenuItem exit, inscriptionMenu, IESNMenu, helpMenu;
     public MenuWindow() {
         super("Test");
-        setBounds(0, 0, 300, 500);
+        setBounds(0, 0, 500, 500);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
@@ -30,7 +30,26 @@ public class MenuWindow extends JFrame {
         helpMenu = new JMenuItem("Aide");
 
         exit.addActionListener(e -> System.exit(0));
-        IESNMenu.addActionListener(e -> this.add(new IesnInformation(), BorderLayout.CENTER));
+        IESNMenu.addActionListener(e -> {
+            this.add(new IesnInformation(), BorderLayout.CENTER);
+            setVisible(true);
+        });
+        inscriptionMenu.addActionListener(e -> {
+            this.add(new RegistrationForm(), BorderLayout.CENTER);
+            setVisible(true);
+        });
+        helpMenu.addActionListener(e -> {
+            JFrame helpFrame = new JFrame("Aide");
+            helpFrame.setBounds(0, 0, 300, 500);
+            helpFrame.add(new JLabel("lorem ipsum"),BorderLayout.CENTER);
+            JButton button = new JButton("Retour à la fenêtre principale");
+            button.addActionListener(event -> helpFrame.dispose());
+            helpFrame.add(button,BorderLayout.SOUTH);
+            helpFrame.addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {helpFrame.dispose();}
+            });
+            helpFrame.setVisible(true);
+        });
         applicationMenu.add(exit);
         studentMenu.add(inscriptionMenu);
         infoMenu.add(IESNMenu);
