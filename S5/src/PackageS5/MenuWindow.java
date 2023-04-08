@@ -28,14 +28,21 @@ public class MenuWindow extends JFrame {
         inscriptionMenu = new JMenuItem("Inscription");
         IESNMenu = new JMenuItem("IESN");
         helpMenu = new JMenuItem("Aide");
-
+        IesnInformation iesnInformation = new IesnInformation();
+        RegistrationForm registrationForm = new RegistrationForm();
         exit.addActionListener(e -> System.exit(0));
         IESNMenu.addActionListener(e -> {
-            this.add(new IesnInformation(), BorderLayout.CENTER);
+            remove(registrationForm);
+            add(iesnInformation, BorderLayout.CENTER);
+            revalidate();
+            repaint();
             setVisible(true);
         });
         inscriptionMenu.addActionListener(e -> {
-            this.add(new RegistrationForm(), BorderLayout.CENTER);
+            remove(iesnInformation);
+            add(registrationForm, BorderLayout.CENTER);
+            revalidate();
+            repaint();
             setVisible(true);
         });
         helpMenu.addActionListener(e -> {
@@ -60,5 +67,7 @@ public class MenuWindow extends JFrame {
         menuBar.add(infoMenu);
         setJMenuBar(menuBar);
         setVisible(true);
+        setResizable(false);
+
     }
 }
